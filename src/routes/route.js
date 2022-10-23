@@ -40,4 +40,81 @@ router.get('/student-details/:name', function(req, res){
     res.send('Dummy response')
 })
 
-module.exports = router;
+//QUENSTION.1 
+router.get('/movies', function(req, res){ 
+    let movies = ['Ye jawani hai deewani', 'Uri', 'HeraPheri', 'The Nun'] 
+   res.send(movies) 
+});
+ 
+//QUENSTION.2
+router.get('/movie/:indexNumber', function(req, res){ 
+    let movies = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins'] 
+  index = req.params.indexNumber  
+  res.send(movies[index]) 
+  });
+ 
+//QUENSTION.3  
+
+router.get('/movies/:indexNumber',function(req,res){
+    let Movies= ['Rang de Basanti','The shining', 'Lord of the rings', 'Batman begins','heathers','dangal']
+    let Mnumber = req.params.indexNumber
+        if (Mnumber<Movies.length && Mnumber>=0)
+            return res.send(Movies[Mnumber])
+        else
+            res.send ('it is not a valid indexNumber ')
+        });
+
+
+//QUENSTION.4
+
+router.get('/films',function(req,res){
+    const film=[ {
+        'id': 1,
+        'name': 'The Shining'
+       }, {
+        'id': 2,
+        'name': 'Incendies'
+       }, {
+        'id': 3,
+        'name': 'Rang de Basanti'
+       }, {
+        'id': 4,
+        'name': 'Finding Nemo'
+       }]
+      let films = film.reduce((obj,item)=>Object.assign(obj, {[item.id]:item.name}),{})
+      res.send(films)  
+    });
+
+   
+//QUENSTION.5
+
+    router.get("/films/:filmId", function (req, res) {
+        // films accessing using filmid 
+        let requestParams = req.params
+       let  movieIndex=requestParams.filmId-1
+    
+        const films = [
+          {
+            id: 1,
+            name: "The Shining",
+          },
+          {
+            id: 2,
+            name: "Incendies",
+          },
+          {
+            id: 3,
+            name: "Rang de Basanti",
+          },
+          {
+            id: 4,
+            name: "Finding Nemo",
+          },
+        ];
+        if( movieIndex <= -1 || movieIndex >=4 ){
+               res.send("No movie exists with this id")
+         }
+        res.send(films[movieIndex]);
+      });
+ 
+   module.exports = router;
