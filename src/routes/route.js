@@ -40,4 +40,30 @@ router.get('/student-details/:name', function(req, res){
     res.send('Dummy response')
 })
 
-module.exports = router;
+router.get('/find-me', function (req,res) {
+        const arr = [1,2,3,5,6,7]
+        let n = arr.length+1
+        let sum_of_natural_number = n*(n+1)/2
+        sum_of_arr = 0; 
+        for(let i=0 ; i<arr.length; i++){
+           const element = arr[i];
+           sum_of_arr+=element
+      }
+      let missingnumber = sum_of_natural_number-sum_of_arr
+        res.send({missingnumber})
+    });
+    
+        router.get('/find-me2', function (req,res) {
+        const arr = [33,34,35,37,38]
+        let n = arr.length+1
+        let sum_of_consecutive_number = n*(33+38)/2
+        sum_of_arr = 0; 
+        for(let i=0 ; i<arr.length; i++){
+           const element = arr[i];
+           sum_of_arr+=element
+      }
+      let missingnumber = sum_of_consecutive_number-sum_of_arr
+        res.send({missingnumber})
+    });
+    
+    module.exports = router;
