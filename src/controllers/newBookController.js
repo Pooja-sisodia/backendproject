@@ -3,17 +3,17 @@ const newBookModel = require("../models/newBookModel")
 const newPublisherModel = require("../models/newPublisherModel")
 
 
-// create new book on the database
+
 let createBook = async function (req, res) {
     let book = req.body
     let authorId = book.author_id
     let publisherId = book.publisher
     const arrId = await newAuthorModel.find().select({ _id: 1 })
     const arrPublisher = await newPublisherModel.find().select({ _id: 1 })
-    // a check the author id and b check the publisher id
+
     let a = false
     let b = false
-// check the condition is valid Id or not
+// check the condition is valid Id or notz
     arrId.forEach(element => {
         let authorID2 = element._id
         if (authorID2 == authorId) {
@@ -38,8 +38,8 @@ let createBook = async function (req, res) {
 }
 // get all the book from the database with publisher info and author
 const getBooksData = async function (req, res) {
-    const allBook = await newBookModel.find().populate(['author_id', 'publisher'])
-    res.send(allBook)
+    const allBook = await newBookModel.find().populate('author_Id', 'publisher_Id')
+   return res.send(allBook)
 }
 // update the value true of isHardCover 
 const updateValue = async function (req, res) {
@@ -52,7 +52,6 @@ const updateValue = async function (req, res) {
 const updatePrice = async function (req, res) {
     const data = await newAuthorModel.find({rating:{$gt:3.5}}).select({_id:1})
     const update=await newBookModel.updateMany({author_id:data},{$inc:{price:+10}},{new:true})
-
     res.send(update);
 }
 
