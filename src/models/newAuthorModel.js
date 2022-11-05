@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const newAuthorSchema = new mongoose.Schema( {
     author_Name: {
         type:String,
-        required:true,
         unique:true
     },
     age: Number,

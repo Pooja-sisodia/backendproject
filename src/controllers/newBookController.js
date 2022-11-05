@@ -3,36 +3,19 @@ const newBookModel = require("../models/newBookModel")
 const newPublisherModel = require("../models/newPublisherModel")
 
 
-
 let createBook = async function (req, res) {
     let book = req.body
-    let authorId = book.author_id
-    let publisherId = book.publisher
-    const arrId = await newAuthorModel.find().select({ _id: 1 })
-    const arrPublisher = await newPublisherModel.find().select({ _id: 1 })
+    let authorId = book.author_Id
+    let publisherId = book.publisher_Id
+    const arrId = await newAuthorModel.findById(authorId)
+    if(!arrId){return res.send("author id is not valid OOOO")}
 
-    let a = false
-    let b = false
-// check the condition is valid Id or notz
-    arrId.forEach(element => {
-        let authorID2 = element._id
-        if (authorID2 == authorId) {
-            a = true
-            arrPublisher.forEach(element2 => {
-                let publisherId2 = element2._id
-                if (publisherId == publisherId2) {
-                    b = true
+    const arrPublisher = await newPublisherModel.findById(publisherId)
+    if(!arrPublisher){return res.send("publisher id is not valid OOOO")}
 
-                }
-            });
-
-        }
-    });
-    // when wrong id got send messege acording the invalid
-    if (!a) {
-        res.send("author id is not valid")
-    }
-    if (!b) res.send("publisher id is not valid")
+    console.log(arrId)
+    console.log(arrPublisher)
+    
     let bookCreated = await newBookModel.create(book)
     res.send(bookCreated)
 }

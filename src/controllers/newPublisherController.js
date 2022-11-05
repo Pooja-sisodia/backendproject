@@ -1,8 +1,8 @@
 const newPublisherModel= require("../models/newPublisherModel")
 
 const createPublisher= async function (req, res) {
-    let book = req.body
-    let publisherCreated = await newPublisherModel.create(book)
+    let data = req.body
+    let publisherCreated = await newPublisherModel.create(data)
     res.send({data: publisherCreated})
 }
 
